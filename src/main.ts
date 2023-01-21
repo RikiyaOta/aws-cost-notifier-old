@@ -9,6 +9,8 @@ export class AwsCostNotifierStack extends Stack {
         new Function(this, 'aws-cost-notifier-lambda-function', {
             runtime: Runtime.PROVIDED_AL2,
             architecture: Architecture.ARM_64,
+            functionName: 'aws-cost-notifier',
+            description: 'AWS 料金の通知を行う。(RikiyaOta 実装)',
             handler: 'aws-cost-notifier',
             code: Code.fromAsset(`${__dirname}/../target/lambda/aws-cost-notifier`),
             tracing: Tracing.ACTIVE,
