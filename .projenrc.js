@@ -5,11 +5,13 @@ const project = new awscdk.AwsCdkTypeScriptApp({
   name: 'aws-cost-notifier',
   
   gitignore: [
-    'target/'
+    'target/',
+    'dev/',
   ],
 
   scripts: {
-    "build:lambda": "cargo lambda build --release --arm64"
+    "build:lambda": "cargo lambda build --release --arm64",
+    "run:dev": "aws lambda invoke --function-name aws-cost-notifier dev/out.json"
   },
 
   // deps: [],                /* Runtime dependencies of this module. */

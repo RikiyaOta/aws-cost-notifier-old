@@ -152,6 +152,14 @@
       "name": "pre-compile",
       "description": "Prepare the project for compilation"
     },
+    "run:dev": {
+      "name": "run:dev",
+      "steps": [
+        {
+          "exec": "aws lambda invoke --function-name aws-cost-notifier dev/out.json"
+        }
+      ]
+    },
     "synth": {
       "name": "synth",
       "description": "Synthesizes your cdk app into cdk.out",
