@@ -1,22 +1,20 @@
 use aws_sdk_costexplorer as costexplorer;
 use aws_sdk_costexplorer::model::{DateInterval, Granularity};
+use chrono::{NaiveDate, Utc};
+use chrono_utilities::naive::DateTransitions;
 use lambda_runtime::{service_fn, Error, LambdaEvent};
 use serde_json::{json, Value};
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
     println!("execute bootstrap#main");
-    let runtime_handler = service_fn(hello_world);
+    let runtime_handler = service_fn(handler);
     lambda_runtime::run(runtime_handler).await?;
     Ok(())
 }
 
-async fn hello_world(_event: LambdaEvent<Value>) -> Result<Value, Error> {
-    //let first_name = event["firstName"].as_str().unwrap_or("world");
-    //Ok(json!({"message": format!("Hello, {}!", first_name)}))
-
+async fn handler(_event: LambdaEvent<Value>) -> Result<Value, Error> {
     let _ = get_cost().await;
-
     Ok(json!({"message": "Hello, World!"}))
 }
 
@@ -50,13 +48,17 @@ async fn get_cost() -> Result<(), costexplorer::Error> {
     }
      */
 
+    let now = Utc::now().naive_utc();
+    let start_date = now.date().start_of_month().unwrap();
+    let end_date = now.date();
+
     let operation = client
         .get_cost_and_usage()
         .granularity(Granularity::Monthly)
         .time_period(
             DateInterval::builder()
-                .start("2023-01-01")
-                .end("2023-02-01")
+                .start(format_date(start_date))
+                .end(format_date(end_date))
                 .build(),
         )
         .metrics("UnblendedCost");
@@ -71,4 +73,8 @@ async fn get_cost() -> Result<(), costexplorer::Error> {
     }
 
     Ok(())
+}
+
+fn format_date(date: NaiveDate) -> String {
+    date.format("%Y-%m-%d").to_string()
 }
