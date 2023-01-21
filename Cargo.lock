@@ -83,6 +83,7 @@ dependencies = [
  "aws-config",
  "aws-sdk-costexplorer",
  "chrono",
+ "chrono-utilities",
  "lambda_runtime",
  "serde_json",
  "tokio",
@@ -450,6 +451,16 @@ dependencies = [
  "time 0.1.45",
  "wasm-bindgen",
  "winapi",
+]
+
+[[package]]
+name = "chrono-utilities"
+version = "0.0.0-alpha1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a690f90eeeff8b71ef9bb609577b8d1de74656d3e8178cbfce60e55da2269089"
+dependencies = [
+ "chrono",
+ "time 0.1.45",
 ]
 
 [[package]]
