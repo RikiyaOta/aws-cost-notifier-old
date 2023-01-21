@@ -24,6 +24,14 @@
         }
       ]
     },
+    "build:lambda": {
+      "name": "build:lambda",
+      "steps": [
+        {
+          "exec": "cargo lambda build --release --arm64"
+        }
+      ]
+    },
     "bundle": {
       "name": "bundle",
       "description": "Prepare assets"

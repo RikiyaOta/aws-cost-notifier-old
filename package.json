@@ -2,6 +2,7 @@
   "name": "aws-cost-notifier",
   "scripts": {
     "build": "npx projen build",
+    "build:lambda": "npx projen build:lambda",
     "bundle": "npx projen bundle",
     "clobber": "npx projen clobber",
     "compile": "npx projen compile",

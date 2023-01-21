@@ -8,6 +8,10 @@ const project = new awscdk.AwsCdkTypeScriptApp({
     'target/'
   ],
 
+  scripts: {
+    "build:lambda": "cargo lambda build --release --arm64"
+  },
+
   // deps: [],                /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: [],             /* Build dependencies for this module. */
