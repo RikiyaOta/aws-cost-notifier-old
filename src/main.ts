@@ -15,6 +15,9 @@ export class AwsCostNotifierStack extends Stack {
             handler: 'aws-cost-notifier',
             code: Code.fromAsset(`${__dirname}/../target/lambda/aws-cost-notifier`),
             tracing: Tracing.ACTIVE,
+            environment: {
+                "RUST_LOG": "info"
+            }
         })
 
         lambdaFunction.addToRolePolicy(new PolicyStatement({
